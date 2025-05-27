@@ -9,42 +9,9 @@
     <form id="formulario">
         <input type="text" name="nome" placeholder="Nome">
         <input type="text" name="email" placeholder="Email">
-        <button id="botonEnviar"> Enviar </button>    
+        <button id="botonEnviar">Enviar</button>
     </form>
-    <div id="mensaxe"></div>
-    <script>
-        botonEnviar.addEventListener("click",async (e)=>{
-            e.preventDefault();
-            //const {nome, email} = formulario;
-            //console.log(nome.value, email.value);
-
-            let datosFormulario = new FormData(formulario);
-            let entradas = Object.fromEntries(datosFormulario.entries());
-
-            console.log(JSON.stringify(entradas))
-
-            let obxectoEnvio = {
-                method: "POST",
-                headers:{
-                    "Content-type":"application/json"
-                },
-                body: JSON.stringify(entradas)
-            } 
-            let respostaServer = await fetch("/acceso", obxectoEnvio);
-
-            let resposta = await respostaServer.json();
-
-            console.log(resposta.resposta);
-
-            if(resposta.resposta === "acceso autorizado") {
-                console.log("iremos á app")
-                location.replace("/app");
-            }else{
-                console.log(resposta.resposta);
-                mensaxe.innerHTML = resposta.resposta;
-            }
-        })
-
-    </script>
+    <div id="mensagem"></div>
+    <script type="module" src="../javascript/index.js"></script>
 </body>
 </html>
