@@ -14,6 +14,7 @@ const isUser = (req, res,next) => {
     let datoEnviadoEnErro = {resposta:"Usuario o contraseña incorrectos"}
 
     const desencriptoUser = jwt.verify(authorization,process.env.SEGREDO);
+    
     console.log("desencriptoUser ",desencriptoUser)
     const {usuario, email} = desencriptoUser;
 
