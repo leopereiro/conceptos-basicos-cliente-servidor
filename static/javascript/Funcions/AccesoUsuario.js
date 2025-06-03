@@ -1,4 +1,4 @@
-import {endpoints} from "../Datos/datos.js"
+import {endpoints} from "../datos.js"
 
 export async function AccesoUsuario() {
     botonEnviar.addEventListener("click",async (e)=>{

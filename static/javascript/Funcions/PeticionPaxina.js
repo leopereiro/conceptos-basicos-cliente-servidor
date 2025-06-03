@@ -1,5 +1,5 @@
 import { endpoints } from "../datos.js"
-import { eventosClientes } from "../funcions.js"
+import { eventosCliente } from "./funcions.js"
 
 export async function PeticionPaxina(){
                 let token = localStorage.getItem("token")
@@ -48,7 +48,7 @@ export async function PeticionPaxina(){
                         localStorage.removeItem("token");
                         location.replace("/");
                     }
-                eventosClientes("#sair",sair)
+                eventosCliente("#sair",sair)
         
 
 }
