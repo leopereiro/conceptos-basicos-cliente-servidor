@@ -1,4 +1,6 @@
-export async function AcesoUsuario() {
+import {endpoints} from "../Datos/datos.js"
+
+export async function AccesoUsuario() {
     botonEnviar.addEventListener("click",async (e)=>{
             e.preventDefault();
             //const {nome, email} = formulario;// desesctructura o obxeto de entrada
@@ -16,7 +18,7 @@ export async function AcesoUsuario() {
                 },
                 body: JSON.stringify(entradas)
             }
-            let respostaServer = await fetch("/acceso", obxetoEnvio) 
+            let respostaServer = await fetch(endpoints.acceso, obxetoEnvio) 
 
             let resposta = await respostaServer.json();
 

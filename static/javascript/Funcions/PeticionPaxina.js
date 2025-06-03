@@ -1,18 +1,19 @@
-import { endpoints } from "../Datos/datos.js"
+import { endpoints } from "../datos.js"
+import { eventosClientes } from "../funcions.js"
 
 export async function PeticionPaxina(){
-    let token = localStorage.getItem("token")
+                let token = localStorage.getItem("token")
                 console.log("entro ... token? ",token)
 
-                let obxectoEnvio = await fetch("/paxina-app",{
+                let obxectoEnvio = {
                     method:"GET",
                     headers:{
                         "Authorization": token
                     }
-                })
+                }
 
-                const paxinaEnTexto = await fetch(endpoints.paginaApp, obxectoEnvio);
-                const paxinaText = await paxinaEnTexto.text()
+                const paxinaEnTexto = await fetch(endpoints.paxinaApp, obxectoEnvio)
+                const paxinaText = await paxinaEnTexto.text();
                 console.log("paxina ?",paxinaText)
                 document.body.innerHTML = paxinaText;
 
@@ -23,21 +24,31 @@ export async function PeticionPaxina(){
                 // - Teño que saber o endpoint, neste caso/tareas
                 // - Teño que saber o método, neste caso GET
 
-                const peticionTarefas = await fetch(endpoints, tareas, obxectoEnvio);
-                const tarefasText = await peticionTarefas.json()
-                console.log("tarefas: ", tarefasText)
+                const tarefas = await fetch(endpoints.tarefas, obxectoEnvio);
+                const tarefasJson = await tarefas.json()
+                console.log("tarefas: ", tarefasJson)
 
                 const refMain = document.querySelector("main");
                 console.log("refMain ?", refMain)
 
-                for(let tarefa in tarefasJson) {
-                console.log(tarefa)
-                refMain.innerHTML += `<div>${tarefasText.tareas1}</div>`
-                }
+                            let elementoDiv = document.createElement("div");
 
-                sair.addEventListener("click",()=>{
+      for (let propiedade in tarefasJson) {
+        console.log(tarefasJson[propiedade], propiedade); // CONTIDO DO OBXETO obxetos[propiedade], propiedade É A PROPIEDADE
+        let elementoP = document.createElement("p"); // CREO UNHA ETIQUETA 'p'
+        elementoP.innerHTML = tarefasJson[propiedade]; // ACCEDO O propiedade DUN OBXETO E a introduzco na etiqueta p creada
+        console.log("elementoP", elementoP);
+        elementoDiv.append(elementoP); // INTRODUZCO NO DIV a etiqueta creada p co seu propiedade
+        console.log(elementoDiv);
+      }
+      document.body.append(elementoDiv);
+
+                const sair = ()=>{
                         console.log("sair")
                         localStorage.removeItem("token");
                         location.replace("/");
-                    })
+                    }
+                eventosClientes("#sair",sair)
+        
+
 }

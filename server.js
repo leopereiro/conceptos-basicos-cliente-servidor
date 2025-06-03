@@ -28,6 +28,15 @@ app.get("/paxina-app",isUser,(req,res)=>{
     res.send(paxinas.app)
 })
 
+app.get("/tarefas", isUser,(req,res)=> {
+    const tarefas = {
+        tarefas1: "esta é a primeira tarea",
+        tarefas2: "esta é a segunda tarea",
+        tarefas3: "esta é a terceira tarea"
+    }
+    res.send(tarefas);
+})
+
 
 //START SERVER
 app.listen(3000, function () {
