@@ -23,7 +23,10 @@ app.post("/acceso", accesoUser);
 app.get("/app",(req,res)=>{
     res.sendFile(path.join(__dirname, "static/views/app.html"));
 })
-
+app.post("/recibo-datos-test", (req, res) => {
+    console.log("Datos recibidos:", req.body);
+    res.send({ mensaje: "Datos recibidos correctamente" });
+});
 app.get("/paxina-app",isUser,(req,res)=>{
     res.send(paxinas.app)
 })

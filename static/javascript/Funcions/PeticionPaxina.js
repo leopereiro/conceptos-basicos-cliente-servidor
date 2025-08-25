@@ -1,9 +1,9 @@
 import { endpoints } from "../datos.js"
 import { eventosCliente } from "./funcions.js"
-
+import {adaptoToken,EnvioDatos} from "./EnvioDatos.js"
 export async function PeticionPaxina(){
                 let token = localStorage.getItem("token")
-                console.log("entro ... token? ",token)
+                //console.log("entro ... token? ",token)
 
                 let obxectoEnvio = {
                     method:"GET",
@@ -14,10 +14,14 @@ export async function PeticionPaxina(){
 
                 const paxinaEnTexto = await fetch(endpoints.paxinaApp, obxectoEnvio)
                 const paxinaText = await paxinaEnTexto.text();
+                const tokenParseado = adaptoToken()
+                console.log("parseo token ???", tokenParseado)
                 console.log("paxina ?",paxinaText)
                 document.body.innerHTML = paxinaText;
+                
 
-                envio.addEventListener("submit", (e) => {
+                
+                envio.addEventListener("submit", async (e) => {
                     e.preventDefault();
                     console.log("formulario");
                     let datosFormulario = new FormData(envio);
@@ -27,6 +31,9 @@ export async function PeticionPaxina(){
                         datosFormulario.entries(),
                         Object.fromEntries(datosFormulario.entries())
                     );
+
+                    let datoRecibido = await EnvioDatos(Object.fromEntries(datosFormulario.entries()),endpoints.insertar)
+                    console.log("datoRecibido ???", datoRecibido)
                     for (let [name, value] of datosFormulario) {
                         console.log(`${name} ${value}`);
     

@@ -1,5 +1,6 @@
 export const endpoints ={
     acceso: "/acceso",
     paxinaApp: "/paxina-app",
-    tarefas: "/tarefas"
+    tarefas: "/tarefas",
+    insertar: "/recibo-datos-test"
 } 
