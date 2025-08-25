@@ -18,7 +18,7 @@ const isUser = (req, res,next) => {
     console.log("desencriptoUser ",desencriptoUser)
     const {usuario, email} = desencriptoUser;
 
-    let condicionUsuarioCorrecto = usuario == 'Israel' && email == 'israel@israel.com';
+    let condicionUsuarioCorrecto = usuario == 'Leo' && email == 'leo@leo.com';
 
     if(condicionUsuarioCorrecto){       
         next()

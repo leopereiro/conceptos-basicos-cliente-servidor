@@ -5,7 +5,7 @@ const accesoUser = (req, res) => {
 
     // ESTA CONDICIÓN FAI A EQUIVALENCIA A ENTRAR NA BASE DE DATOS A SOLICITAR
     // O LOGUEO DO USUARIO
-    let condicionUsuarioCorrecto = req.body.nome == 'Israel' && req.body.email == 'israel@israel.com';
+    let condicionUsuarioCorrecto = req.body.nome == 'Leo' && req.body.email == 'leo@leo.com';
 
     let datoEnviadoCondicionUsuarioCorrecto = {}
     

@@ -30,9 +30,9 @@ app.get("/paxina-app",isUser,(req,res)=>{
 
 app.get("/tarefas", isUser,(req,res)=> {
     const tarefas = {
-        tarefas1: "esta é a primeira tarea",
+        /*tarefas1: "esta é a primeira tarea",
         tarefas2: "esta é a segunda tarea",
-        tarefas3: "esta é a terceira tarea"
+        tarefas3: "esta é a terceira tarea"*/
     }
     res.send(tarefas);
 })
