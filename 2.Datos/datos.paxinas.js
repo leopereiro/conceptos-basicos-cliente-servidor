@@ -9,42 +9,35 @@ const paxinas = {
       <label for="nome"> Nome : </label>
       <input id="nome" name="Nome" type="text" placeholder="Introduce nome " />
 
-      <label for="apelido 1">Apelido 1 :</label>
+      <label for="mail">mail :</label>
       <input
-        id="apelido 1"
-        name="Apelido 1"
+        id="mail"
+        name="mail"
         type="text"
-        placeholder="Introduce apelido 1"
-      />
-      <label for="apelido 2">Apelido 2 :</label>
-      <input
-        id="apelido 2"
-        name="Apelido 2"
-        type="text"
-        placeholder="Introduce apelido 2"
-      />
-      <label for="idade"> Idade: </label>
-      <input
-        id="idade"
-        name="Idade"
-        type="text"
-        placeholder="Introduce profesión"
-      />
-      <label for="profesion"> Profesión: </label>
-      <input
-        id="profesion"
-        name="Profesion"
-        type="text"
-        placeholder="Introduce profesión"
+        placeholder="Introduce o mail"
       />
       <button type="submit">Insertar</button>
       <button type="reset">Borrar datos</button>
     </form>
-    
-
-    
     `
+  ,
 
+  tarefas: `
+    <button id="sair"> Sair </button>
+    <div class="caixaTarefa">
+      <p>Tarefas usuario:</p>
+    </div>
+    <form id="envioTarefa" enctype="multipart/form-data">
+      <label for="titulo"> Título: </label>
+      <input id="titulo" name="Titulo" type="text" placeholder="Introduce título" />
+
+      <label for="descricao"> Descripción: </label>
+      <textarea id="descricao" name="Descricao" placeholder="Introduce descripción"></textarea>
+
+      <button type="submit">Insertar</button>
+      <button type="reset">Borrar datos</button>
+    </form>
+    `
     
 }
 

@@ -5,22 +5,35 @@ const accesoUser = (req, res) => {
 
     // ESTA CONDICIÓN FAI A EQUIVALENCIA A ENTRAR NA BASE DE DATOS A SOLICITAR
     // O LOGUEO DO USUARIO
-    let condicionUsuarioCorrecto = req.body.nome == 'Leo' && req.body.email == 'leo@leo.com';
-
-    let datoEnviadoCondicionUsuarioCorrecto = {}
+    let condicionAdminOk = req.body.nome == 'Leo' && req.body.email == 'leo@leo.com';
+    req.body.rol = 'admin';
+    let resposta = {}
     
     let datoEnviadoEnErro = {resposta:"faltan campos ou usuario non rexistrado"}
 
+    let novoUsuario = req.body.nome == 'Ivan' && req.body.email == 'ivan@ivan.com';
 
-    if(condicionUsuarioCorrecto){
+
+    if(condicionAdminOk && req.body.rol == 'admin'){
         // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
         const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
         console.log("tokenUSer ",tokenUsuario)
-        datoEnviadoCondicionUsuarioCorrecto.resposta = "acesso autorizado";
-        datoEnviadoCondicionUsuarioCorrecto.tokenUsuario = tokenUsuario
+        resposta.resposta = "acesso autorizado";
+        resposta.tokenUsuario = tokenUsuario
                    
-        res.send(datoEnviadoCondicionUsuarioCorrecto);
-    }else{
+        res.send(resposta);
+
+        } else if (novoUsuario) {
+                // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
+                console.log("entra en if ????")
+        const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
+        console.log("tokenUSer ",tokenUsuario)
+        resposta.resposta = "acesso autorizado tarefas";
+        resposta.tokenUsuario = tokenUsuario
+                   
+        res.send(resposta);
+        
+        }else{
         res.send(datoEnviadoEnErro); 
     }
      

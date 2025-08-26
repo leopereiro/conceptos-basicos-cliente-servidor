@@ -8,8 +8,30 @@ h1 {
     margin: 2px;
     cursor: pointer;
 }
-form{
-    
+
+#envio {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin: 50px auto;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightgreen;
+    border-radius: 5px;
+
+}
+
+.caixa{
+    width: 500px;
+    min-height: 250px;
+    border: 1px solid black;
+    margin: 30px auto;
+    padding: 5px;
+    background-color: greenyellow;
+    border-radius: 5px;
+}
+
+#envioTarefa {
     display: flex;
     flex-direction: column;
     width: 700px;
@@ -19,13 +41,13 @@ form{
     background-color: lightblue;
     border-radius: 5px;
 }
-.caixa{
+
+.caixaTarefa{
     width: 500px;
-    height: 250px;
+    min-height: 250px;
     border: 1px solid black;
     margin: 30px auto;
     padding: 5px;
-    background-color: gainsboro;
+    background-color: rgb(127, 127, 247);
     border-radius: 5px;
-
 }

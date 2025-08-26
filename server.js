@@ -20,9 +20,16 @@ app.use(express.static(path.join(__dirname, "static")));
 //// PETICIONS
 
 app.post("/acceso", accesoUser);
+
+// PAXINAS VALEIRAS
 app.get("/app",(req,res)=>{
     res.sendFile(path.join(__dirname, "static/views/app.html"));
 })
+app.get("/tarefas",(req,res)=>{
+    res.sendFile(path.join(__dirname, "static/views/tarefas.html"));
+})
+
+// O CONTIDO DAS PÁXINAS
 app.post("/recibo-datos-test", (req, res) => {
     console.log("Datos recibidos:", req.body);
     res.send({ mensaje: "Datos recibidos correctamente" });
@@ -31,13 +38,9 @@ app.get("/paxina-app",isUser,(req,res)=>{
     res.send(paxinas.app)
 })
 
-app.get("/tarefas", isUser,(req,res)=> {
-    const tarefas = {
-        /*tarefas1: "esta é a primeira tarea",
-        tarefas2: "esta é a segunda tarea",
-        tarefas3: "esta é a terceira tarea"*/
-    }
-    res.send(tarefas);
+app.get("/paxina-tarefas",isUser,(req,res)=> {
+    
+    res.send(paxinas.tarefas);
 })
 
 

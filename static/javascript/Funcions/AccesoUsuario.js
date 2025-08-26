@@ -22,12 +22,17 @@ export async function AccesoUsuario() {
 
             let resposta = await respostaServer.json();
 
-            console.log("resposta ????",resposta.tokenUsuario);
-
+            //console.log("resposta ????",resposta.tokenUsuario);
+            //console.log("resposta ????",resposta.resposta);
             if(resposta.resposta === "acesso autorizado"){
                 console.log("iremos a app")
                 localStorage.setItem("token",resposta.tokenUsuario)
-                location.replace("/app");
+                location.replace("/app");//GET
+            }else if (resposta.resposta === "acesso autorizado tarefas") {
+                    console.log("iremos a tarefas")
+                    localStorage.setItem("token",resposta.tokenUsuario)
+                    location.replace("/tarefas");
+
             }else{
                 console.log(resposta.resposta);
                 mensagem.innerHTML = resposta.resposta;

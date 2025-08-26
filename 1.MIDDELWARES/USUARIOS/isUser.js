@@ -15,12 +15,14 @@ const isUser = (req, res,next) => {
 
     const desencriptoUser = jwt.verify(authorization,process.env.SEGREDO);
     
-    console.log("desencriptoUser ",desencriptoUser)
+    //console.log("desencriptoUser ",desencriptoUser)
     const {usuario, email} = desencriptoUser;
+    console.log("isUser usuario ",usuario )
+    console.log("isUser email ",email )
+    let condicionAdmin = usuario == 'Leo' && email == 'leo@leo.com';
+    let novoUsuario = usuario == 'Ivan' && email == 'ivan@ivan.com';
 
-    let condicionUsuarioCorrecto = usuario == 'Leo' && email == 'leo@leo.com';
-
-    if(condicionUsuarioCorrecto){       
+    if(condicionAdmin || novoUsuario){       
         next()
     }else if(usuario === null || email === null || email === undefined || usuario === undefined){
         //throw new HttpError("Usuario o contraseña incorrectos", 403);
