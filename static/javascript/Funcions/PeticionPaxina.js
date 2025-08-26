@@ -31,7 +31,8 @@ export async function PeticionPaxina(){
                         datosFormulario.entries(),
                         Object.fromEntries(datosFormulario.entries())
                     );
-
+                    let outra = "3";
+                    let otros = `${endpoints.insertar}/?variable=${outra}`
                     let datoRecibido = await EnvioDatos(Object.fromEntries(datosFormulario.entries()),endpoints.insertar)
                     console.log("datoRecibido ???", datoRecibido)
                     for (let [name, value] of datosFormulario) {
