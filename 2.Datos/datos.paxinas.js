@@ -5,17 +5,18 @@ const paxinas = {
     <div class="caixa">
       <p>Datos usuario:</p>
     </div>
-    <form id="envio" enctype="multipart/form-data">
-      <label for="nome"> Nome : </label>
-      <input id="nome" name="Nome" type="text" placeholder="Introduce nome " />
+    <form id="envio">
+      <label for="user_nome"> Nome : </label>
+      <input id="user_nome" name="user_nome" type="text" placeholder="Introduce nome " />
 
-      <label for="mail">mail :</label>
+      <label for="user_mail">mail :</label>
       <input
-        id="mail"
-        name="mail"
+        id="user_mail"
+        name="user_mail"
         type="text"
         placeholder="Introduce o mail"
       />
+      
       <button type="submit">Insertar</button>
       <button type="reset">Borrar datos</button>
     </form>
@@ -25,9 +26,10 @@ const paxinas = {
   tarefas: `
     <button id="sair"> Sair </button>
     <div class="caixaTarefa">
+      <button id="gardarTarefa"> Gardar Tarefa </button>
       <p>Tarefas usuario:</p>
     </div>
-    <form id="envioTarefa" enctype="multipart/form-data">
+    <form id="envioTarefa">
       <label for="titulo"> Título: </label>
       <input id="titulo" name="Titulo" type="text" placeholder="Introduce título" />
 

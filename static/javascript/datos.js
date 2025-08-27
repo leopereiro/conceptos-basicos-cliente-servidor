@@ -3,5 +3,6 @@ export const endpoints ={
     paxinaApp: "/paxina-app",
     tarefas: "/tarefas",
     paxinaTarefas: "/paxina-tarefas",
-    insertar: "/recibo-datos-test"
+    creousuario: "/creousuario",
+    insertar: "/insertar-tarefa"
 } 

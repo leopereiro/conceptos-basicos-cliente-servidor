@@ -1,6 +1,6 @@
 import { endpoints } from "../datos.js"
-import { eventosCliente } from "./funcions.js"
-import {adaptoToken,EnvioDatos} from "./EnvioDatos.js"
+import { eventosCliente,insercionUsers} from "./funcions.js"
+import {adaptoToken} from "./EnvioDatos.js"
 
 export async function PeticionPaxina(){
     let token = localStorage.getItem("token")
@@ -19,28 +19,14 @@ export async function PeticionPaxina(){
     console.log("parseo token ???", tokenParseado)
     console.log("paxina ?",paxinaText)
     document.body.innerHTML = paxinaText;
-                           
-    envio.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        console.log("formulario");
-        let datosFormulario = new FormData(envio);
-        let refEtiquetaCaixa = document.querySelector(".caixa");
-        console.log(
-            "datosFormulario ",
-            datosFormulario.entries(),
-            Object.fromEntries(datosFormulario.entries())
-        );
-        let outra = "3";
-        let otros = `${endpoints.insertar}/?variable=${outra}`
-        let datoRecibido = await EnvioDatos(Object.fromEntries(datosFormulario.entries()),endpoints.insertar)
-        console.log("datoRecibido ???", datoRecibido)
-        for (let [name, value] of datosFormulario) {
-            console.log(`${name} ${value}`);
-            let etiquetaP = document.createElement("p");
-            etiquetaP.innerHTML = value;
-            refEtiquetaCaixa.append(etiquetaP);
-            }
+    const envioTarefa = document.getElementById("envioTarefa");
+    if (envioTarefa) {
+    envioTarefa.addEventListener("submit", async (e) => {
+        // ...resto do código...
     });
+}
+
+    insercionUsers(endpoints);
 
                 
     // PASOS PARA SOLICITAR AS TAREFAS

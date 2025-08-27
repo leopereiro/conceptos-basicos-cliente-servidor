@@ -1,41 +1,70 @@
+const db = require("../../creo_bbdd.js");
 const jwt = require('jsonwebtoken');
 const accesoUser = (req, res) => {
     const {nome, email} = req.body;// desesctructura o obxeto de entrada
     console.log(nome, email);
 
-    // ESTA CONDICIÓN FAI A EQUIVALENCIA A ENTRAR NA BASE DE DATOS A SOLICITAR
-    // O LOGUEO DO USUARIO
-    let condicionAdminOk = req.body.nome == 'Leo' && req.body.email == 'leo@leo.com';
-    req.body.rol = 'admin';
     let resposta = {}
-    
-    let datoEnviadoEnErro = {resposta:"faltan campos ou usuario non rexistrado"}
 
-    let novoUsuario = req.body.nome == 'Ivan' && req.body.email == 'ivan@ivan.com';
-
-
-    if(condicionAdminOk && req.body.rol == 'admin'){
-        // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
-        const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
-        console.log("tokenUSer ",tokenUsuario)
-        resposta.resposta = "acesso autorizado";
-        resposta.tokenUsuario = tokenUsuario
-                   
-        res.send(resposta);
-
-        } else if (novoUsuario) {
-                // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
-                console.log("entra en if ????")
-        const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
-        console.log("tokenUSer ",tokenUsuario)
-        resposta.resposta = "acesso autorizado tarefas";
-        resposta.tokenUsuario = tokenUsuario
-                   
-        res.send(resposta);
-        
-        }else{
-        res.send(datoEnviadoEnErro); 
+    db.get("SELECT NOME_USUARIO, MAIL_USUARIO, ROL_USUARIO FROM USUARIOS WHERE NOME_USUARIO = ? AND MAIL_USUARIO = ?", [req.body.nome, req.body.email], (err, row) => {
+    if (err) {
+        console.error(err.message);
+        return res.status(500).send("Error interno");
     }
+    if (row) {
+        // Usuario encontrado
+        req.body.rol = row.ROL_USUARIO;
+        let condicionAdmin = req.body.rol == 'admin';
+        if (condicionAdmin) {
+            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email }, process.env.SEGREDO);
+            res.status(200).send({ resposta: "acesso autorizado", tokenUsuario });
+        } else {
+            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email }, process.env.SEGREDO);
+            res.status(200).send({ resposta: "acesso autorizado tarefas", tokenUsuario });
+        }
+    } else {
+        // Usuario no encontrado
+        res.status(401).send({ resposta: "Usuario o contraseña incorrectos" });
+    }
+});
+    /**db.get("SELECT NOME_USUARIO, MAIL_USUARIO, ROL_USUARIO FROM USUARIOS WHERE NOME_USUARIO = ? AND MAIL_USUARIO = ?", [req.body.nome, req.body.email], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send("Error interno");
+        }
+        if (row) {
+            // O USUARIO XA ESTÁ REGISTRADO
+            console.log("Usuario encontrado:", row);
+            req.body.rol = row.ROL_USUARIO;
+            console.log("Rol de usuario:", req.body.rol);
+        }
+
+        console.log("req.body.rol antes ", req.body.rol);
+        let condicionAdmin = req.body.rol == 'admin';
+        console.log("condicionAdmin ", condicionAdmin, req.body.rol);
+        if(condicionAdmin){
+            // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
+            const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
+            console.log("tokenUSer ",tokenUsuario)
+            resposta.resposta = "acesso autorizado";
+            resposta.tokenUsuario = tokenUsuario
+                console.log("entro en ADMIN")     
+            res.status(200).send(resposta);
+
+            } else {
+                    // ENVIO O USUARIO ENCRIPTADO -- SECRETO 
+                    console.log("entra en if ????")
+                    const tokenUsuario = jwt.sign({usuario: req.body.nome,email:req.body.email},process.env.SEGREDO)
+                    console.log("tokenUSer ",tokenUsuario)
+                    resposta.resposta = "acesso autorizado tarefas";
+                    resposta.tokenUsuario = tokenUsuario
+                    console.log("entro en USUARIO")
+                    res.status(200).send(resposta);
+            
+            }
+    });
+    **/
+    
      
 }
 

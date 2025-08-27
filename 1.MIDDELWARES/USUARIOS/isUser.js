@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+/**const jwt = require('jsonwebtoken');
 const isUser = (req, res,next) => {
 
     const { authorization } = req.headers;
@@ -30,5 +30,29 @@ const isUser = (req, res,next) => {
     }
      
 }
+
+module.exports = isUser;**/
+
+const jwt = require('jsonwebtoken');
+const isUser = (req, res, next) => {
+    const { authorization } = req.headers;
+    if (!authorization) {
+        return res.status(401).send({ resposta: "Falta cabeceira de autorización" });
+    }
+
+    let datoEnviadoEnErro = { resposta: "Usuario o contraseña incorrectos" };
+
+    try {
+        const desencriptoUser = jwt.verify(authorization, process.env.SEGREDO);
+        const { usuario, email } = desencriptoUser;
+        if (usuario && email) {
+            next();
+        } else {
+            res.status(403).send(datoEnviadoEnErro);
+        }
+    } catch (e) {
+        res.status(403).send(datoEnviadoEnErro);
+    }
+};
 
 module.exports = isUser;

@@ -1,19 +1,23 @@
-export const adaptoToken = ()=>{
+export const adaptoToken = (endpointserver)=>{
+  let autorizacion = endpointserver
   
-  return JSON.stringify(localStorage.getItem("token"))
+  return autorizacion = (endpointserver == "acceso") ? JSON.stringify(localStorage.getItem("token")) : localStorage.getItem("token")
 }
 
-export const EnvioDatos = async (datos,endpoint)=>{
+
+export const EnvioDatos = async (datos,endpointserver)=>{
+  
     let datoEnviado = {
     method:'POST',
     headers:{
-      "Authorization": adaptoToken(),
+      "Authorization": adaptoToken(endpointserver),
       "Content-type":"application/json"
     },
     body:JSON.stringify(datos)
   }
-  let datosRecibido = await fetch(endpoint,datoEnviado); // delete
+  console.log("endpointserver ???", endpointserver)
+  let datosRecibido = await fetch(endpointserver,datoEnviado); // delete
   let datosRecibidoJson = await datosRecibido.json();
-   console.log("datosRecibido.json() EnvioDatos",datosRecibidoJson)
+  console.log("datosRecibido.json() EnvioDatos",datosRecibidoJson)
   return datosRecibidoJson;
 }
