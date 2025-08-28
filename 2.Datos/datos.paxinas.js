@@ -26,7 +26,6 @@ const paxinas = {
   tarefas: `
     <button id="sair"> Sair </button>
     <div class="caixaTarefa">
-      <button id="gardarTarefa"> Gardar Tarefa </button>
       <p>Tarefas usuario:</p>
     </div>
     <form id="envioTarefa">
@@ -36,7 +35,7 @@ const paxinas = {
       <label for="descricao"> Descripción: </label>
       <textarea id="descricao" name="Descricao" placeholder="Introduce descripción"></textarea>
 
-      <button type="submit">Insertar</button>
+      <button type="submit" id="gardarTarefa">Insertar</button>
       <button type="reset">Borrar datos</button>
     </form>
     `

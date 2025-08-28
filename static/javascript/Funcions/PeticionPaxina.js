@@ -19,12 +19,12 @@ export async function PeticionPaxina(){
     console.log("parseo token ???", tokenParseado)
     console.log("paxina ?",paxinaText)
     document.body.innerHTML = paxinaText;
-    const envioTarefa = document.getElementById("envioTarefa");
+    /**const envioTarefa = document.getElementById("envioTarefa");
     if (envioTarefa) {
     envioTarefa.addEventListener("submit", async (e) => {
         // ...resto do código...
     });
-}
+}**/
 
     insercionUsers(endpoints);
 
