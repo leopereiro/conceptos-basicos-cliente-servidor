@@ -30,7 +30,7 @@ export async function PeticionTarefas() {
                 Object.fromEntries(datosFormulario.entries())
             );
 
-            let datoRecibido = await EnvioDatos(Object.fromEntries(datosFormulario.entries()), endpoints.insertar);
+            let datoRecibido = await EnvioDatos({filasTabla: [Object.fromEntries(datosFormulario.entries())]}, endpoints.insertar);
             console.log("datoRecibido ???", datoRecibido);
             for (let [name, value] of datosFormulario) {
                 console.log(`${name} ${value}`);
@@ -38,6 +38,11 @@ export async function PeticionTarefas() {
                 etiquetaP.innerHTML = value;
                 refEtiquetaCaixa.append(etiquetaP);
             }
+            /**let datoRecibido = await EnvioDatos(
+            { filasTabla: [Object.fromEntries(datosFormulario.entries())] },
+            endpoints.insertar
+            );**/
+
         });
     }
 

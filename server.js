@@ -43,7 +43,7 @@ app.get("/paxina-tarefas",isUser,(req,res)=> {
 
 app.post("/insertar-tarefa", isUser, insertarDatosTarefa, (req, res) => {
     // ...lógica para gardar a tarefa...
-    res.json({ mensaje: "Tarefa gardada correctamente" });
+    res.send({ mensaje: "Tarefa gardada correctamente"});
 });
 /**app.post("/creousuario",isUser, newUser,(req,res)=>{
     console.log("Datos recibidos para crear usuario:", req.body);
