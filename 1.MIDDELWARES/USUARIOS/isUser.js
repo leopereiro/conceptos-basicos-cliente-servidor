@@ -44,8 +44,9 @@ const isUser = (req, res, next) => {
 
     try {
         const desencriptoUser = jwt.verify(authorization, process.env.SEGREDO);
-        const { usuario, email } = desencriptoUser;
-        if (usuario && email) {
+        const { usuario, email, id } = desencriptoUser;
+        req.idUser = id; // Engado o ID do usuario á req para usalo despois
+        if (usuario && email && id) {
             next();
         } else {
             res.status(403).send(datoEnviadoEnErro);

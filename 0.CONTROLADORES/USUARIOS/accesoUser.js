@@ -5,8 +5,8 @@ const accesoUser = (req, res) => {
     console.log(nome, email);
 
     let resposta = {}
-
-    db.get("SELECT NOME_USUARIO, MAIL_USUARIO, ROL_USUARIO FROM USUARIOS WHERE NOME_USUARIO = ? AND MAIL_USUARIO = ?", [req.body.nome, req.body.email], (err, row) => {
+    
+    db.get("SELECT ID_USUARIO,NOME_USUARIO, MAIL_USUARIO, ROL_USUARIO FROM USUARIOS WHERE NOME_USUARIO = ? AND MAIL_USUARIO = ?", [req.body.nome, req.body.email], (err, row) => {
     if (err) {
         console.error(err.message);
         return res.status(500).send("Error interno");
@@ -16,10 +16,10 @@ const accesoUser = (req, res) => {
         req.body.rol = row.ROL_USUARIO;
         let condicionAdmin = req.body.rol == 'admin';
         if (condicionAdmin) {
-            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email }, process.env.SEGREDO);
-            res.status(200).send({ resposta: "acesso autorizado", tokenUsuario });
+            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email, id: row.ID_USUARIO }, process.env.SEGREDO);
+            res.status(200).send({ resposta: "acesso autorizado", tokenUsuario });// res.status(200).send(row)
         } else {
-            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email }, process.env.SEGREDO);
+            const tokenUsuario = jwt.sign({ usuario: req.body.nome, email: req.body.email, id: row.ID_USUARIO }, process.env.SEGREDO);
             res.status(200).send({ resposta: "acesso autorizado tarefas", tokenUsuario });
         }
     } else {

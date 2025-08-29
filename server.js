@@ -31,6 +31,11 @@ app.get("/tarefas",(req,res)=>{
     res.sendFile(path.join(__dirname, "static/views/tarefas.html"));
 })
 
+app.get("/lista-tarefas", isUser, (req, res) => {
+    // Aquí iría la lógica para obtener la lista de tarefas
+    res.send({ resposta: "Lista de tarefas" });
+});
+
 // O CONTIDO DAS PÁXINAS
 
 app.get("/paxina-app",isUser,(req,res)=>{
@@ -41,10 +46,7 @@ app.get("/paxina-tarefas",isUser,(req,res)=> {
     res.send(paxinas.tarefas);
 })
 
-app.post("/insertar-tarefa", isUser, insertarDatosTarefa, (req, res) => {
-    // ...lógica para gardar a tarefa...
-    res.send({ mensaje: "Tarefa gardada correctamente"});
-});
+app.post("/insertar-tarefa", isUser, insertarDatosTarefa );
 /**app.post("/creousuario",isUser, newUser,(req,res)=>{
     console.log("Datos recibidos para crear usuario:", req.body);
     res.send({mensaje: "Usuario creado correctamente"});
