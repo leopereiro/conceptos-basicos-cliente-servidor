@@ -5,5 +5,7 @@ export const endpoints ={
     listaTarefas: "/lista-tarefas",
     paxinaTarefas: "/paxina-tarefas",
     creousuario: "/creousuario",
-    insertar: "/insertar-tarefa"
+    insertar: "/insertar-tarefa",
+    actualizar: "/actualizar-tarefa",
+    borrar: "/borrar-tarefa"
 } 

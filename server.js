@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const cors = require('cors');
 const { accesoUser, newUser } = require("./0.CONTROLADORES/USUARIOS");
-const { insertarDatosTarefa, invoicesUser } = require("./0.CONTROLADORES/TAREFAS")
+const { insertarDatosTarefa, invoicesUser,listaTarefas ,actualizarDatosTarefa,borrarDatosTarefa} = require("./0.CONTROLADORES/TAREFAS")
 const { isUser } = require("./1.MIDDELWARES/USUARIOS");
 //const folderUser = require("./1.MIDDELWARES/USUARIOS/folderUser");
 const paxinas = require("./2.Datos/datos.paxinas");
@@ -31,10 +31,8 @@ app.get("/tarefas",(req,res)=>{
     res.sendFile(path.join(__dirname, "static/views/tarefas.html"));
 })
 
-app.get("/lista-tarefas", isUser, (req, res) => {
-    // Aquí iría la lógica para obtener la lista de tarefas
-    res.send({ resposta: "Lista de tarefas" });
-});
+app.get("/lista-tarefas", isUser, listaTarefas);
+
 
 // O CONTIDO DAS PÁXINAS
 
@@ -45,13 +43,14 @@ app.get("/paxina-app",isUser,(req,res)=>{
 app.get("/paxina-tarefas",isUser,(req,res)=> {
     res.send(paxinas.tarefas);
 })
+// accións sobre a base de datos
+app.post("/creousuario", isUser, newUser);
+
+// SOBRE A LISTA DE TAREFAS
 
 app.post("/insertar-tarefa", isUser, insertarDatosTarefa );
-/**app.post("/creousuario",isUser, newUser,(req,res)=>{
-    console.log("Datos recibidos para crear usuario:", req.body);
-    res.send({mensaje: "Usuario creado correctamente"});
-})**/
-app.post("/creousuario", isUser, newUser);
+app.put("/actualizar-tarefa", isUser, actualizarDatosTarefa );
+app.delete("/borrar-tarefa", isUser, borrarDatosTarefa );
 
 
 //START SERVER

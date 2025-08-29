@@ -21,3 +21,20 @@ export const EnvioDatos = async (datos,endpointserver)=>{
   console.log("datosRecibido.json() EnvioDatos",datosRecibidoJson)
   return datosRecibidoJson;
 }
+
+export const EnvioDatosPUT = async (datos,endpointserver)=>{
+  
+    let datoEnviado = {
+    method:'PUT',
+    headers:{
+      "Authorization": adaptoToken(endpointserver),
+      "Content-type":"application/json"
+    },
+    body:JSON.stringify(datos)
+  }
+  console.log("endpointserver ???", endpointserver)
+  let datosRecibido = await fetch(endpointserver,datoEnviado); // delete
+  let datosRecibidoJson = await datosRecibido.json();
+  console.log("datosRecibido.json() EnvioDatos",datosRecibidoJson)
+  return datosRecibidoJson;
+}

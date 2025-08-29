@@ -1,5 +1,5 @@
 const db = require("../../creo_bbdd.js");
-const insertarDatosTarefa = (req,res,next) =>{
+const borrarDatosTarefa = (req,res,next) =>{
   const {filasTabla} = req.body;
   console.log("req.idUser", req.idUser)
   try{
@@ -28,4 +28,4 @@ const insertarDatosTarefa = (req,res,next) =>{
   res.send({mensaxe:"datos insertados?"})
 }
 
-module.exports = insertarDatosTarefa;
+module.exports = borrarDatosTarefa;
